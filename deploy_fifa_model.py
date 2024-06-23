@@ -1,21 +1,17 @@
 import streamlit as st
-import pandas as pd
-import pickle
+import joblib
+import os
+import sklearn
 
-file_path = 'C:/Users/user/OneDrive - Ashesi University/Sophomore Year Semester II/Introduction to Artificial Intelligence/Fifa_Assignment/RandomForestRegressor.pkl'
+model_filename = 'RandomForestClassifier.pkl'  # Adjust this if your model file name is different
+model_filepath = os.path.join(os.path.dirname(__file__), model_filename)
 
+# Load the model
+@st.cache(allow_output_mutation=True)
+def load_model(filepath):
+    return joblib.load(filepath)
 
-with open(file_path, 'rb') as file:
-    model = pickle.load(file)
-# try:
-#     with open(file_path, 'rb') as file:
-#         model = pickle.load(file)
-#         print("Model loaded successfully!")
-#     except FileNotFoundError:
-#         print(f"Error: File '{file_path}' not found.")
-#     except Exception as e:
-#         print(f"Error loading model: {e}")
-
+model = load_model(model_filepath)
 
 
 def main(): 
